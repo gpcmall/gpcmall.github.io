@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products | Supply Run – GPC Supplier for U.S. Bases in Korea</title>
+<meta name="description" content="Browse office supplies, toner, safety gear, IT, tools, medical and GSA furniture available to U.S. military units in Korea. Add items to a quote list and get a VAT-exempt GPC quote.">
+<link rel="canonical" href="https://gpcmall.com/products.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#12233D;--navy2:#182C4B;--line:#DAD7CE;--paper:#F7F6F2;--sand:#EFEDE6;--ink:#16181D;--body:#3E434C;--muted:#B9C2D0;--accent:#E0A23B;--link:#8A5410}
+*{box-sizing:border-box}
+body{margin:0;font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.5}
+a{color:var(--link)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.1em}
+header{background:var(--navy);color:var(--paper);position:sticky;top:0;z-index:10}
+.hdr{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 32px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px;color:var(--paper);text-decoration:none}
+.logo{width:40px;height:40px;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.brand b{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;letter-spacing:.04em;display:block}
+.brand small{font-size:12px;color:var(--muted)}
+.qbtn{background:var(--accent);color:var(--navy);border:0;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer}
+.top{background:var(--navy);color:var(--paper);padding:40px 0 32px;border-top:1px solid #24385A}
+h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:40px;margin:0 0 8px}
+.top p{margin:0;color:#C9D1DC;max-width:720px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tabs button{background:transparent;color:#E4E8EE;border:1px solid #34496D;padding:9px 14px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--accent);color:var(--navy);border-color:var(--accent);font-weight:600}
+.tabs span{opacity:.7;font-size:12px;margin-left:4px}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:20px 0}
+.bar input{flex:1 1 320px;font:inherit;padding:12px 14px;border:1px solid #A9A497;background:#fff}
+.bar .count{color:var(--body);font-size:14px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line)}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+th{font-family:'Archivo',sans-serif;font-size:13px;letter-spacing:.06em;background:var(--sand);color:#4A4F59}
+td.code{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;color:#4A4F59}
+td .spec{display:block;color:var(--body);font-size:13px;margin-top:2px}
+td .brand{display:inline-block;font-size:12px;border:1px solid var(--line);padding:1px 6px;margin-top:4px;color:#4A4F59}
+.add{background:var(--navy);color:var(--paper);border:0;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.add.on{background:#2F6B3A}
+.more{display:block;margin:20px auto 48px;background:#fff;border:1px solid #A9A497;padding:12px 24px;font:inherit;cursor:pointer}
+.note{color:var(--body);font-size:14px;margin:0 0 48px}
+aside{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#fff;border-left:1px solid var(--line);box-shadow:-8px 0 24px rgba(0,0,0,.08);transform:translateX(100%);transition:transform .2s;z-index:20;display:flex;flex-direction:column}
+aside.open{transform:none}
+aside header{position:static;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+aside h2{font-family:'Archivo',sans-serif;font-size:20px;margin:0}
+aside .x{background:none;border:0;color:var(--paper);font-size:24px;cursor:pointer}
+aside ol{list-style:none;margin:0;padding:0;overflow:auto;flex:1}
+aside li{display:flex;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line);font-size:14px}
+aside li div{flex:1;min-width:0}
+aside li small{font-family:'IBM Plex Mono',monospace;color:#4A4F59}
+aside li input{width:64px;padding:6px;font:inherit}
+aside li button{background:none;border:0;color:#9A2B2B;cursor:pointer;font-size:18px}
+aside .foot{padding:16px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+aside .foot a{display:block;text-align:center;background:var(--accent);color:var(--navy);text-decoration:none;font-weight:600;padding:14px}
+aside .empty{padding:24px 20px;color:var(--body)}
+td.th{width:76px;padding:8px}
+.thumb{width:60px;height:60px;border:1px solid var(--line);background:var(--sand);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;padding:0}
+.thumb img{width:100%;height:100%;object-fit:contain;background:#fff}
+.thumb svg{width:26px;height:26px;opacity:.45}
+.name{background:none;border:0;padding:0;font:inherit;font-weight:600;text-align:left;cursor:pointer;color:var(--ink)}
+.name:hover{text-decoration:underline}
+dialog{border:0;padding:0;width:min(760px,94vw);max-height:90vh}
+dialog::backdrop{background:rgba(12,24,41,.6)}
+.dlg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;padding:28px}
+.big{aspect-ratio:1;border:1px solid var(--line);background:var(--sand);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.big img{width:100%;height:100%;object-fit:contain;background:#fff}
+.big span{color:var(--body);font-size:14px;padding:16px;text-align:center}
+.gal{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.gal button{width:56px;height:56px;padding:0;border:1px solid var(--line);background:#fff;cursor:pointer}
+.gal button[aria-current=true]{border:2px solid var(--accent)}
+.gal img{width:100%;height:100%;object-fit:contain}
+.dlg h2{font-family:'Archivo',sans-serif;font-size:24px;margin:6px 0 10px}
+.dlg dl{margin:16px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.dlg dt{color:#4A4F59}.dlg dd{margin:0}
+.dlg .close{position:absolute;right:12px;top:8px;background:none;border:0;font-size:26px;cursor:pointer}
+@media (max-width:640px){.dlg{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+ .wrap,.hdr{padding-left:16px;padding-right:16px}
+ h1{font-size:30px}
+ th.u,td.u,th.c,td.code{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="hdr">
+<a class="brand" href="index.html">
+<span class="logo"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+<span><b>SUPPLY RUN</b><small>Office · Furniture · Supplies · gpcmall.com</small></span>
+</a>
+<button class="qbtn" id="openq" type="button">Quote list (<span id="qn">0</span>)</button>
+</div>
+</header>
+
+<main>
+<section class="top">
+<div class="wrap">
+<p class="mono" style="color:var(--accent);margin-bottom:8px">PRODUCTS</p>
+<h1>Find it, add it, get one quote</h1>
+<p>Search our catalog by item, part number or brand. Add what your unit needs to the quote list and send it in one request. Prices are quoted per order, VAT-exempt for GPC.</p>
+<div class="tabs" id="tabs" role="group" aria-label="Categories"></div>
+</div>
+</section>
+
+<div class="wrap">
+<div class="bar">
+<label for="q" class="mono" style="position:absolute;left:-9999px">Search</label>
+<input id="q" type="search" placeholder="Search item, part number or brand (e.g. HP 58A, safety boots, CAC reader)">
+<span class="count" id="count"></span>
+</div>
+<table>
+<thead><tr><th></th><th class="c">CODE</th><th>ITEM</th><th class="u">UNIT</th><th></th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+<button class="more" id="more" type="button" hidden>Show more</button>
+<p class="note">Not in the list? Add a note in the quote form with a part number, model or link and we will source it.</p>
+</div>
+</main>
+
+<aside id="drawer" aria-label="Quote list">
+<header><h2>Quote list</h2><button class="x" id="closeq" type="button" aria-label="Close">×</button></header>
+<ol id="qlist"></ol>
+<div class="foot"><a href="index.html#quote">Continue to quote request</a><span style="font-size:13px;color:var(--body)">Your list is copied into the request form.</span></div>
+</aside>
+
+<dialog id="dlg" aria-label="Item details"><div style="position:relative"><button class="close" id="dclose" type="button" aria-label="Close">×</button><div class="dlg" id="dbody"></div></div></dialog>
+
+<script>
+const CATS=[["office","Office Supplies"],["toner","Ink & Toner"],["furniture","GSA Furniture"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["medical","Medical & Water Testing"],["printing","Custom Signs & Printing"],["events","Events, Fitness & Rentals"]];
+const PAGE=60, cache={};
+const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
+let cat=new URLSearchParams(location.search).get('cat')||'office', shown=PAGE, list=[];
+const $=id=>document.getElementById(id);
+function load(){try{return JSON.parse(localStorage.getItem('sr_quote')||'[]')}catch(e){return []}}
+function save(q){try{localStorage.setItem('sr_quote',JSON.stringify(q))}catch(e){}}
+let quote=load();
+async function data(slug){
+  if(cache[slug])return cache[slug];
+  if(window.SR_DATA&&SR_DATA[slug])return cache[slug]=SR_DATA[slug];
+  const r=await fetch('data/'+slug+'.json');return cache[slug]=await r.json();
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function tabs(){
+  $('tabs').innerHTML=CATS.map(([s,t])=>`<button type="button" data-s="${s}" aria-pressed="${s===cat}">${esc(t)}</button>`).join('');
+}
+async function render(){
+  const all=await data(cat), q=$('q').value.trim().toLowerCase();
+  const words=q.split(/\s+/).filter(Boolean);
+  list=words.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return words.every(w=>h.includes(w))}):all;
+  const inQ=new Set(quote.map(x=>x.c));
+  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(i.i)}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||'<tr><td colspan="5">No match in this category. Try another category or send us the part number.</td></tr>';
+  $('count').textContent=list.length.toLocaleString()+' items';
+  $('more').hidden=list.length<=shown;
+}
+function drawQ(){
+  $('qn').textContent=quote.length;
+  $('qlist').innerHTML=quote.length?quote.map((x,k)=>`<li><div><small>${esc(x.c)}</small><br>${esc(x.n)}</div><input type="number" min="1" value="${x.q}" data-k="${k}" aria-label="Quantity"><button type="button" data-r="${k}" aria-label="Remove">×</button></li>`).join(''):'<li class="empty">Your list is empty. Use “Add to quote” on any item.</li>';
+}
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;cat=b.dataset.s;shown=PAGE;history.replaceState(null,'','?cat='+cat);tabs();render()};
+$('q').oninput=()=>{shown=PAGE;render()};
+$('more').onclick=()=>{shown+=PAGE;render()};
+function detail(c){
+  const i=list.find(x=>x.c===c);if(!i)return;const imgs=[i.i,...(i.g||[])].filter(Boolean);const inQ=quote.some(x=>x.c===c);
+  $('dbody').innerHTML=`<div><div class="big" id="big">${imgs.length?`<img src="${esc(imgs[0])}" alt="${esc(i.n)}">`:'<span>Photo coming soon.<br>Ask us for a product image with your quote.</span>'}</div>${imgs.length>1?`<div class="gal">${imgs.map((u,k)=>`<button type="button" data-g="${esc(u)}" aria-current="${k===0}"><img src="${esc(u)}" alt=""></button>`).join('')}</div>`:''}</div><div><span class="mono" style="color:var(--link)">${esc(i.c)}</span><h2>${esc(i.n)}</h2>${i.s?`<p style="margin:0;color:var(--body)">${esc(i.s)}</p>`:''}<dl>${i.b?`<dt>Brand</dt><dd>${esc(i.b)}</dd>`:''}${i.u?`<dt>Unit</dt><dd>${esc(i.u)}</dd>`:''}<dt>Price</dt><dd>Quoted per order · VAT-exempt for GPC</dd></dl><button type="button" class="add${inQ?' on':''}" data-c="${esc(i.c)}" style="padding:12px 18px">${inQ?'Added ✓':'Add to quote'}</button></div>`;
+  $('dlg').showModal();
+}
+$('dbody').onclick=e=>{const g=e.target.closest('[data-g]');if(g){$('big').innerHTML=`<img src="${g.dataset.g}" alt="">`;$('dbody').querySelectorAll('[data-g]').forEach(b=>b.setAttribute('aria-current',b===g));return}
+  const b=e.target.closest('.add');if(!b)return;toggle(b.dataset.c);detail(b.dataset.c)};
+$('dclose').onclick=()=>$('dlg').close();
+$('dlg').onclick=e=>{if(e.target===$('dlg'))$('dlg').close()};
+function toggle(c){if(quote.some(x=>x.c===c))quote=quote.filter(x=>x.c!==c);else{const i=list.find(x=>x.c===c);quote.push({c,n:i.n,q:1})}save(quote);drawQ();render()}
+$('rows').onclick=e=>{const d=e.target.closest('[data-d]');if(d){detail(d.dataset.d);return}
+  const b=e.target.closest('.add');if(!b)return;const c=b.dataset.c;
+  if(quote.some(x=>x.c===c))quote=quote.filter(x=>x.c!==c);else{const i=list.find(x=>x.c===c);quote.push({c,n:i.n,q:1})}
+  save(quote);drawQ();render()};
+$('qlist').oninput=e=>{const k=e.target.dataset.k;if(k==null)return;quote[k].q=Math.max(1,+e.target.value||1);save(quote)};
+$('qlist').onclick=e=>{const k=e.target.dataset.r;if(k==null)return;quote.splice(k,1);save(quote);drawQ();render()};
+$('openq').onclick=()=>$('drawer').classList.add('open');
+$('closeq').onclick=()=>$('drawer').classList.remove('open');
+tabs();drawQ();render();
+</script>
+</body>
+</html>

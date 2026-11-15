@@ -1,0 +1,47 @@
+[
+ {
+  "slug": "furniture",
+  "title": "GSA Furniture",
+  "count": 195
+ },
+ {
+  "slug": "office",
+  "title": "Office Supplies",
+  "count": 2357
+ },
+ {
+  "slug": "toner",
+  "title": "Ink & Toner",
+  "count": 415
+ },
+ {
+  "slug": "safety",
+  "title": "Safety & PPE",
+  "count": 499
+ },
+ {
+  "slug": "it",
+  "title": "IT & Electronics",
+  "count": 1034
+ },
+ {
+  "slug": "industrial",
+  "title": "Industrial & Tools",
+  "count": 570
+ },
+ {
+  "slug": "medical",
+  "title": "Medical & Water Testing",
+  "count": 54
+ },
+ {
+  "slug": "printing",
+  "title": "Custom Signs & Printing",
+  "count": 154
+ },
+ {
+  "slug": "events",
+  "title": "Events, Fitness & Rentals",
+  "count": 51
+ }
+]
