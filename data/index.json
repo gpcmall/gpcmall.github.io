@@ -2,46 +2,46 @@
  {
   "slug": "furniture",
   "title": "GSA Furniture",
-  "count": 877
+  "count": 769
  },
  {
   "slug": "office",
   "title": "Office Supplies",
-  "count": 2421
+  "count": 2556
  },
  {
   "slug": "toner",
   "title": "Ink & Toner",
-  "count": 415
+  "count": 413
  },
  {
   "slug": "safety",
   "title": "Safety & PPE",
-  "count": 505
+  "count": 450
  },
  {
   "slug": "it",
   "title": "IT & Electronics",
-  "count": 1067
+  "count": 1017
  },
  {
   "slug": "industrial",
   "title": "Industrial & Tools",
-  "count": 579
+  "count": 655
  },
  {
   "slug": "medical",
   "title": "Medical & Water Testing",
-  "count": 54
+  "count": 57
  },
  {
   "slug": "printing",
   "title": "Custom Signs & Printing",
-  "count": 157
+  "count": 130
  },
  {
   "slug": "events",
   "title": "Events, Fitness & Rentals",
-  "count": 52
+  "count": 80
  }
 ]
