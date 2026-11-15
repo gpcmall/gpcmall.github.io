@@ -132,7 +132,8 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 
 <script>
 const CATS=[["office","Office Supplies"],["toner","Ink & Toner"],["furniture","GSA Furniture"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["medical","Medical & Water Testing"],["printing","Custom Signs & Printing"],["events","Events, Fitness & Rentals"]];
-const PAGE=60, cache={}, DATA_V='20261115e';
+const PAGE=60, cache={}, DATA_V='20261115f';
+const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
 let cat=new URLSearchParams(location.search).get('cat')||'office', shown=PAGE, list=[];
 const $=id=>document.getElementById(id);
@@ -153,7 +154,7 @@ async function render(){
   const words=q.split(/\s+/).filter(Boolean);
   list=words.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return words.every(w=>h.includes(w))}):all;
   const inQ=new Set(quote.map(x=>x.c));
-  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(i.i)}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||'<tr><td colspan="5">No match in this category. Try another category or send us the part number.</td></tr>';
+  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||'<tr><td colspan="5">No match in this category. Try another category or send us the part number.</td></tr>';
   $('count').textContent=list.length.toLocaleString()+' items';
   $('more').hidden=list.length<=shown;
 }
