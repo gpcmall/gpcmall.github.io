@@ -178,6 +178,23 @@ textarea{resize:vertical}
 button{justify-self:start;background:var(--navy);color:var(--paper);border:0;padding:16px 32px;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 button:hover{background:#1B3358}
 .hp{position:absolute;left:-9999px}
+.plan{background:#fff;border-top:1px solid var(--line)}
+.plan .top{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:32px}
+.plan .top>div{flex:999 1 560px;min-width:0}
+.plan .top p.d{margin:12px 0 0;font-size:18px;line-height:1.6;color:var(--body);max-width:720px}
+.plan .free{background:var(--accent);color:var(--navy);font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:.06em;padding:10px 16px}
+.plan .gal{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:40px}
+.plan figure{margin:0;position:relative}
+.plan figure img.r{width:100%;height:300px;object-fit:cover;display:block;border:1px solid var(--line)}
+.plan figure img.p{position:absolute;left:10px;top:10px;width:78px;background:#fff;border:1px solid var(--line);padding:3px}
+.plan figcaption{font-size:13px;color:#5B616B;margin-top:8px}
+.plan .cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;padding:22px 26px;margin-top:32px;font-size:17px}
+.plan .cta a{background:var(--accent);color:var(--navy);font-weight:700;text-decoration:none;padding:13px 20px}
+.chk{flex-direction:row;align-items:flex-start;gap:10px;font-weight:600}
+.chk input{width:18px;height:18px;margin:2px 0 0;padding:0}
+.chk span{font-weight:400;color:var(--body);display:block}
+@media (max-width:900px){.plan .gal{grid-template-columns:minmax(0,1fr)}}
+
 .howto{border-top:2px solid var(--ink);padding-top:20px;margin-top:8px}
 .howto h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:20px;color:var(--navy);margin:0 0 14px}
 .howto ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px}
@@ -347,6 +364,28 @@ footer .disc{border-top:1px solid #24385A;padding-top:18px}
 </div>
 </section>
 
+<section class="plan" id="plan">
+<div class="wrap">
+<div class="top">
+<div><p class="mono eyebrow" style="margin:0 0 12px">PLAN BEFORE YOU BUY</p><h2 class="sec">Free site survey and 3D layout for every furniture or fit-out job</h2>
+<p class="d">We measure the room on site with your POC, draw the layout and send a 3D rendering you can attach to the approval packet. You see where every desk, cabinet and outlet goes before anything is ordered.</p></div>
+<span class="free">NO CHARGE</span>
+</div>
+<div class="steps" style="margin-top:0">
+<div><b>1</b><h3>On-site survey</h3><p>We measure walls, doors, outlets and data drops with your POC inside the gate.</p></div>
+<div><b>2</b><h3>Layout and 3D rendering</h3><p>A floor plan and room renderings with the furniture you picked, in your finishes.</p></div>
+<div><b>3</b><h3>Revise and approve</h3><p>Use the drawings for your commander and facilities review. We revise until it fits.</p></div>
+<div><b>4</b><h3>Deliver and install</h3><p>Our crew delivers, assembles and places everything to the approved plan.</p></div>
+</div>
+<div class="gal">
+<figure><img class="r" src="img/plan/conference.jpg" alt="3D rendering of a conference room layout" loading="lazy"><figcaption>Conference room, 3D layout</figcaption></figure>
+<figure><img class="r" src="img/plan/manager-office.jpg" alt="3D rendering of a manager's office" loading="lazy"><img class="p" src="img/plan/manager-office-plan.jpg" alt="Floor plan of the same office" loading="lazy"><figcaption>Manager's office, plan to 3D</figcaption></figure>
+<figure><img class="r" src="img/plan/waiting-room.jpg" alt="3D rendering of a waiting room" loading="lazy"><figcaption>Waiting room, 3D layout</figcaption></figure>
+</div>
+<div class="cta"><span>Planning an office move, a new unit space or a full fit-out?</span><a href="#quote" id="survey-cta">Request a free site survey</a></div>
+</div>
+</section>
+
 <section class="services" id="services">
 <div class="wrap split">
 <div class="l">
@@ -483,6 +522,7 @@ footer .disc{border-top:1px solid #24385A;padding-top:18px}
 <option>Contract / RFQ</option>
 <option>Not sure yet</option>
 </select></label>
+<label class="full chk"><input type="checkbox" name="site_survey" value="Yes - free site survey / 3D layout requested" id="survey-box"><div>I'd like a free site survey and 3D layout<span>For furniture, office moves and fit-outs. We will contact you to set a date.</span></div></label>
 <label class="full">Items or work needed<span class="hint">Can't find what you need in our catalog? Write the product name and quantity, or paste a product URL. We will source it and quote it with the rest.</span><textarea name="items" rows="6" required placeholder="One item per line, for example:&#10;4 x HP 58A toner (CF258A)&#10;2 x office chair mat, 120x90 cm&#10;or paste a product link"></textarea></label>
 <button type="submit" class="full">Send Request</button>
 <p class="after full">We reply by email with a quote. Nothing is charged until your card holder approves it.</p>
@@ -506,6 +546,7 @@ try{var q=JSON.parse(localStorage.getItem('sr_quote')||'[]');var t=document.quer
 if(q.length&&t&&!t.value){t.value=q.map(function(x){return x.q+' x '+x.c+' - '+x.n}).join('\n')+'\n';var n=document.getElementById('qnote');if(n){document.getElementById('qnote-t').textContent=q.length+(q.length==1?' item':' items')+' from your quote list '+(q.length==1?'is':'are')+' added below. You can edit them before sending.';n.hidden=false;}}
 var f=document.querySelector('form[name=quote]');if(f)f.addEventListener('submit',function(){try{localStorage.removeItem('sr_quote')}catch(e){}});}catch(e){}
 </script>
+<script>document.getElementById('survey-cta').addEventListener('click',function(){var b=document.getElementById('survey-box');if(b)b.checked=true;});</script>
 
 </body>
 </html>
