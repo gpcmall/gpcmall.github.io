@@ -156,7 +156,7 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 <div class="wrap">
 <div class="bar">
 <label for="q" class="mono" style="position:absolute;left:-9999px">Search</label>
-<input id="q" type="search" placeholder="Search item, part number or brand (e.g. HP 58A, safety boots, CAC reader)">
+<input id="q" type="search" placeholder="Search all categories: item, part number or brand (e.g. HP 58A, safety boots, CAC reader)">
 <span class="count" id="count"></span>
 </div>
 <table>
@@ -185,10 +185,12 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 
 <script>
 const CATS=[["office","Office Supplies"],["toner","Ink & Toner"],["furniture","GSA Furniture"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["medical","Medical & Water Testing"],["printing","Custom Signs & Printing"],["events","Events, Fitness & Rentals"]];
-const PAGE=60, cache={}, DATA_V='20261117z';
+const PAGE=60, cache={}, DATA_V='20261117za';
 const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
-let cat=new URLSearchParams(location.search).get('cat')||'office', shown=PAGE, list=[];
+const QS=new URLSearchParams(location.search);
+let cat=QS.get('cat')||'office', shown=PAGE, list=[], scope=null, hits={};
+const CNAME=Object.fromEntries(CATS);
 const $=id=>document.getElementById(id);
 function load(){try{return JSON.parse(localStorage.getItem('sr_quote')||'[]')}catch(e){return []}}
 function save(q){try{localStorage.setItem('sr_quote',JSON.stringify(q))}catch(e){}}
@@ -199,25 +201,33 @@ async function data(slug){
   const r=await fetch('data/'+slug+'.json?v='+DATA_V);return cache[slug]=await r.json();
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function words(){return $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean)}
+function match(all,w){return w.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return w.every(x=>h.includes(x))}):all}
 function tabs(){
-  $('gsa').hidden=cat!=='furniture';
-  $('tabs').innerHTML=CATS.map(([s,t])=>`<button type="button" data-s="${s}" aria-pressed="${s===cat}">${esc(t)}</button>`).join('');
+  const searching=words().length, cur=searching?scope:cat;
+  $('gsa').hidden=cur!=='furniture';
+  $('tabs').innerHTML=(searching?`<button type="button" data-s="all" aria-pressed="${cur==='all'}">All categories<span>${Object.values(hits).reduce((a,b)=>a+b,0)}</span></button>`:'')+CATS.map(([s,t])=>`<button type="button" data-s="${s}" aria-pressed="${s===cur}">${esc(t)}${searching?`<span>${hits[s]||0}</span>`:''}</button>`).join('');
 }
 async function render(){
-  const all=await data(cat), q=$('q').value.trim().toLowerCase();
-  const words=q.split(/\s+/).filter(Boolean);
-  list=words.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return words.every(w=>h.includes(w))}):all;
+  const w=words(), tk=++render.n;
+  if(w.length){
+    const sets=await Promise.all(CATS.map(([s])=>data(s)));hits={};const seen=new Set();list=[];
+    sets.forEach((arr,k)=>{const s=CATS[k][0],m=match(arr,w);hits[s]=m.length;if(scope==='all'||scope===s)m.forEach(i=>{if(!seen.has(i.c)){seen.add(i.c);list.push({...i,_cat:s})}})});
+  }else{list=await data(cat);hits={}}
+  if(tk!==render.n)return;
+  tabs();
   const inQ=new Set(quote.map(x=>x.c));
-  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}?v=${DATA_V}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||'<tr><td colspan="5">No match in this category. Try another category or send us the part number.</td></tr>';
+  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}?v=${DATA_V}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}${i._cat&&scope==='all'?`<span class="brand">${esc(CNAME[i._cat])}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||(w.length&&Object.values(hits).some(Boolean)?'<tr><td colspan="5">No match in this category. Pick another category above to see the results.</td></tr>':w.length?'<tr><td colspan="5">No match in any category. Send us the part number, model or a link in the quote form and we will source it.</td></tr>':'<tr><td colspan="5">No items in this category yet.</td></tr>');
   $('count').textContent=list.length.toLocaleString()+' items';
   $('more').hidden=list.length<=shown;
 }
+render.n=0;
 function drawQ(){
   $('qn').textContent=quote.length;
   $('qlist').innerHTML=quote.length?quote.map((x,k)=>`<li><div><small>${esc(x.c)}</small><br>${esc(x.n)}</div><input type="number" min="1" value="${x.q}" data-k="${k}" aria-label="Quantity"><button type="button" data-r="${k}" aria-label="Remove">×</button></li>`).join(''):'<li class="empty">Your list is empty. Use “Add to quote” on any item.</li>';
 }
-$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;cat=b.dataset.s;shown=PAGE;history.replaceState(null,'','?cat='+cat);tabs();render()};
-$('q').oninput=()=>{shown=PAGE;render()};
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;shown=PAGE;if(words().length){scope=b.dataset.s;if(scope!=='all')cat=scope}else{cat=b.dataset.s;history.replaceState(null,'','?cat='+cat)}render()};
+$('q').oninput=()=>{shown=PAGE;scope='all';render()};
 $('more').onclick=()=>{shown+=PAGE;render()};
 function detail(c){
   const i=list.find(x=>x.c===c);if(!i)return;const imgs=[i.i,...(i.g||[])].filter(Boolean);const inQ=quote.some(x=>x.c===c);
@@ -237,6 +247,7 @@ $('qlist').oninput=e=>{const k=e.target.dataset.k;if(k==null)return;quote[k].q=M
 $('qlist').onclick=e=>{const k=e.target.dataset.r;if(k==null)return;quote.splice(k,1);save(quote);drawQ();render()};
 $('openq').onclick=()=>$('drawer').classList.add('open');
 $('closeq').onclick=()=>$('drawer').classList.remove('open');
+if(QS.get('q')){$('q').value=QS.get('q');scope='all'}
 tabs();drawQ();render();
 </script>
 </body>
