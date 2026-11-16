@@ -78,6 +78,23 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 .dlg dl{margin:16px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
 .dlg dt{color:#4A4F59}.dlg dd{margin:0}
 .dlg .close{position:absolute;right:12px;top:8px;background:none;border:0;font-size:26px;cursor:pointer}
+.gsa{background:#fff;border-bottom:1px solid var(--line)}
+.gsa .in{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding:44px 0}
+.gsa .txt{flex:999 1 520px;min-width:0}
+.gsa h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:34px;line-height:1.1;color:var(--navy);margin:0 0 12px}
+.gsa .txt p{margin:0;font-size:17px;color:var(--body);max-width:620px}
+.gsa .mark{flex:1 1 300px;display:flex;justify-content:center}
+.gsa .mark div{background:#fff;padding:48px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.gsa .mark img{width:260px;height:auto;display:block}
+.gsa .mark span{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--body)}
+.gsa .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 0 12px}
+.gsa .facts div{border:1px solid var(--line);background:var(--paper);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.gsa .facts small{font-size:12px;color:#5B616B}
+.gsa .facts b{font-size:15px;color:var(--navy)}
+.gsa .facts .m{font-family:'IBM Plex Mono',monospace;font-weight:500}
+.gsa .only{font-size:13px;color:#5B616B;margin:0;padding:0 0 28px}
+@media (max-width:900px){.gsa .facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.gsa h2{font-size:26px}.gsa .mark div{padding:28px 0}}
 @media (max-width:640px){.dlg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){
  .wrap,.hdr{padding-left:16px;padding-right:16px}
@@ -104,6 +121,28 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 <h1>Find it, add it, get one quote</h1>
 <p>Search our catalog by item, part number or brand. Add what your unit needs to the quote list and send it in one request. Prices are quoted per order, VAT-exempt for GPC.</p>
 <div class="tabs" id="tabs" role="group" aria-label="Categories"></div>
+</div>
+</section>
+
+<section class="gsa" id="gsa" hidden aria-labelledby="gsa-h">
+<div class="wrap">
+<div class="in">
+<div class="txt">
+<h2 id="gsa-h">GSA office furniture, on our own MAS contract</h2>
+<p>Desks, seating, storage and training-room furniture for U.S. units and offices in Korea, ordered under GSA contract 47QSMS24D001L. We deliver and install on base.</p>
+</div>
+<div class="mark"><div>
+<img src="img/gsa/gsa-contract-holder.jpg" alt="GSA Contract Holder" width="260" height="60">
+<span>Contract # 47QSMS24D001L</span>
+</div></div>
+</div>
+<div class="facts">
+<div><small>GSA MAS contract</small><b class="m">47QSMS24D001L</b></div>
+<div><small>Contractor</small><b>Happy Trading Co., Ltd.</b></div>
+<div><small>SAM UEI / CAGE</small><b class="m">ERKYUTEUJ678 / 109HF</b></div>
+<div><small>Ordering</small><b>GPC or delivery order</b></div>
+</div>
+<p class="only">Only the furniture in this category is offered under our GSA contract.</p>
 </div>
 </section>
 
@@ -147,6 +186,7 @@ async function data(slug){
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function tabs(){
+  $('gsa').hidden=cat!=='furniture';
   $('tabs').innerHTML=CATS.map(([s,t])=>`<button type="button" data-s="${s}" aria-pressed="${s===cat}">${esc(t)}</button>`).join('');
 }
 async function render(){
