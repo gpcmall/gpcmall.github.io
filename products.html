@@ -92,6 +92,19 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 .gsa .mark div{background:#fff;padding:48px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .gsa .mark img{width:260px;height:auto;display:block}
 .gsa .mark span{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--body)}
+.gsa .survey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:32px;background:var(--navy);color:#fff;padding:32px;margin:0 0 12px}
+.gsa .sv-k{margin:0 0 8px;color:var(--accent);font-size:13px;letter-spacing:.14em}
+.gsa .survey h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;line-height:1.15;margin:0 0 12px;color:#fff}
+.gsa .sv-t p{margin:0 0 14px;color:#D5DBE4;font-size:16px;line-height:1.55}
+.gsa .sv-t ul{margin:0;padding:0 0 0 18px;color:#fff;line-height:1.8}
+.gsa .sv-f{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;align-content:start}
+.gsa .sv-f label{display:flex;flex-direction:column;gap:5px;font-size:13px;color:#D5DBE4}
+.gsa .sv-f input,.gsa .sv-f textarea{font:inherit;font-size:15px;padding:10px 12px;border:1px solid #3A4F6E;background:#fff;color:var(--ink)}
+.gsa .sv-f .full{grid-column:1/-1}
+.gsa .sv-f button{background:var(--accent);color:var(--navy);font-weight:700;font-size:16px;border:0;padding:14px 18px;cursor:pointer}
+.gsa .sv-f button:hover{filter:brightness(1.07)}
+.gsa .hp{position:absolute;left:-9999px}
+@media (max-width:900px){.gsa .survey{grid-template-columns:minmax(0,1fr);padding:24px}.gsa .sv-f{grid-template-columns:minmax(0,1fr)}}
 .gsa .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 0 12px}
 .gsa .facts div{border:1px solid var(--line);background:var(--paper);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
 .gsa .facts small{font-size:12px;color:#5B616B}
@@ -144,11 +157,30 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 <span>Contract # 47QSMS24D001L</span>
 </div></div>
 </div>
-<div class="facts">
-<div><small>GSA MAS contract</small><b class="m">47QSMS24D001L</b></div>
-<div><small>Contractor</small><b>Happy Trading Co., Ltd.</b></div>
-<div><small>SAM UEI / CAGE</small><b class="m">ERKYUTEUJ678 / 109HF</b></div>
-<div><small>Ordering</small><b>GPC or delivery order</b></div>
+<div class="survey" id="survey">
+<div class="sv-t">
+<p class="mono sv-k">FREE SITE SURVEY</p>
+<h3>Not sure which furniture fits your space?</h3>
+<p>Tell us where you are. We visit your building at no cost, measure the room, suggest furniture that fits your mission and budget, and send a 3D layout before you order.</p>
+<ul><li>No-cost visit to any USFK installation</li><li>Room measurement and furniture selection help</li><li>3D layout and quote before you commit</li></ul>
+</div>
+<form class="sv-f" method="POST" action="https://formsubmit.co/supplyrun1950@gmail.com">
+<input type="hidden" name="_cc" value="bravohpt@gmail.com">
+<input type="hidden" name="_subject" value="Site survey request (furniture) - gpcmall.com">
+<input type="hidden" name="_next" value="https://gpcmall.com/thanks.html">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="request_type" value="Free furniture site survey">
+<p class="hp"><label>Leave empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
+<label>Name &amp; rank<input type="text" name="name" required autocomplete="name"></label>
+<label>Unit / organization<input type="text" name="unit" required></label>
+<label>Email<input type="email" name="email" required autocomplete="email"></label>
+<label>Phone (DSN or cell)<input type="tel" name="phone" autocomplete="tel"></label>
+<label>Installation &amp; building<input type="text" name="location" required placeholder="e.g. Camp Humphreys, Bldg 6400"></label>
+<label>Preferred visit dates<input type="text" name="visit_dates" placeholder="e.g. Week of Dec 7"></label>
+<label class="full">What do you need?<textarea name="details" rows="3" placeholder="Room type, number of people, furniture you have in mind"></textarea></label>
+<button type="submit" class="full">Request a free site survey</button>
+</form>
 </div>
 <p class="only">Only the furniture in this category is offered under our GSA contract.</p>
 </div>
