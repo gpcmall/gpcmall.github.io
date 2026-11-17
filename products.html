@@ -108,6 +108,7 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
  h1{font-size:30px}
  th.u,td.u,th.c,td.code{display:none}
 }
+.specs{margin:0;padding:0 0 0 18px;color:var(--body);line-height:1.55}.specs li{margin:0 0 6px}.sp1{margin:0;color:var(--body)}
 </style>
 </head>
 <body>
@@ -185,7 +186,7 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 
 <script>
 const CATS=[["office","Office Supplies"],["toner","Ink & Toner"],["furniture","GSA Furniture"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["medical","Medical & Water Testing"],["printing","Custom Signs & Printing"],["events","Events, Fitness & Rentals"]];
-const PAGE=60, cache={}, DATA_V='20261117zz8';
+const PAGE=60, cache={}, DATA_V='20261117zz9';
 const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
 const QS=new URLSearchParams(location.search);
@@ -202,6 +203,7 @@ async function data(slug){
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function words(){return $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean)}
+function specHTML(s){if(!s)return'';let a=s.split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean);if(a.length<2){const b=s.split(/;\s+/).map(x=>x.trim()).filter(Boolean);if(b.length>=3)a=b}return a.length<2?`<p class="sp1">${esc(s)}</p>`:`<ul class="specs">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}
 function match(all,w){return w.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return w.every(x=>h.includes(x))}):all}
 function tabs(){
   const searching=words().length, cur=searching?scope:cat;
@@ -231,7 +233,7 @@ $('q').oninput=()=>{shown=PAGE;scope='all';render()};
 $('more').onclick=()=>{shown+=PAGE;render()};
 function detail(c){
   const i=list.find(x=>x.c===c);if(!i)return;const imgs=[i.i,...(i.g||[])].filter(Boolean);const inQ=quote.some(x=>x.c===c);
-  $('dbody').innerHTML=`<div class="pics"><div class="big" id="big">${imgs.length?`<img src="${esc(imgs[0])}?v=${DATA_V}" alt="${esc(i.n)}">`:'<span>Photo coming soon.<br>Ask us for a product image with your quote.</span>'}</div>${imgs.length>1?`<p class="more-ph">More photos below ↓</p>${imgs.slice(1).map(u=>`<figure class="extra"><img src="${esc(u)}" alt="${esc(i.n)} – catalog photo">${u.includes('-life-')?`<figcaption>Room setting from the ${esc(i.b||'maker')} catalog. Other items in the photo are not included.</figcaption>`:u.includes('-info-')?`<figcaption>Series details from the ${esc(i.b||'maker')} catalog.</figcaption>`:''}</figure>`).join('')}`:''}</div><div><span class="mono" style="color:var(--link)">${esc(i.c)}</span><h2>${esc(i.n)}</h2>${i.s?`<p style="margin:0;color:var(--body)">${esc(i.s)}</p>`:''}<dl>${i.b?`<dt>Brand</dt><dd>${esc(i.b)}</dd>`:''}${i.u?`<dt>Unit</dt><dd>${esc(i.u)}</dd>`:''}<dt>Price</dt><dd>Quoted per order · VAT-exempt for GPC</dd></dl><button type="button" class="add${inQ?' on':''}" data-c="${esc(i.c)}" style="padding:12px 18px">${inQ?'Added ✓':'Add to quote'}</button></div>`;
+  $('dbody').innerHTML=`<div class="pics"><div class="big" id="big">${imgs.length?`<img src="${esc(imgs[0])}?v=${DATA_V}" alt="${esc(i.n)}">`:'<span>Photo coming soon.<br>Ask us for a product image with your quote.</span>'}</div>${imgs.length>1?`<p class="more-ph">More photos below ↓</p>${imgs.slice(1).map(u=>`<figure class="extra"><img src="${esc(u)}" alt="${esc(i.n)} – catalog photo">${u.includes('-life-')?`<figcaption>Room setting from the ${esc(i.b||'maker')} catalog. Other items in the photo are not included.</figcaption>`:u.includes('-info-')?`<figcaption>Series details from the ${esc(i.b||'maker')} catalog.</figcaption>`:''}</figure>`).join('')}`:''}</div><div><span class="mono" style="color:var(--link)">${esc(i.c)}</span><h2>${esc(i.n)}</h2>${specHTML(i.s)}<dl>${i.b?`<dt>Brand</dt><dd>${esc(i.b)}</dd>`:''}${i.u?`<dt>Unit</dt><dd>${esc(i.u)}</dd>`:''}<dt>Price</dt><dd>Quoted per order · VAT-exempt for GPC</dd></dl><button type="button" class="add${inQ?' on':''}" data-c="${esc(i.c)}" style="padding:12px 18px">${inQ?'Added ✓':'Add to quote'}</button></div>`;
   $('dlg').showModal();
 }
 $('dbody').onclick=e=>{const g=e.target.closest('[data-g]');if(g){$('big').innerHTML=`<img src="${g.dataset.g}" alt="">`;$('dbody').querySelectorAll('[data-g]').forEach(b=>b.setAttribute('aria-current',b===g));return}
