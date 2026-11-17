@@ -189,7 +189,8 @@ button:hover{background:#1B3358}
 .plan .free{background:var(--accent);color:var(--navy);font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:.06em;padding:10px 16px}
 .plan .gal{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:40px}
 .plan figure{margin:0;position:relative}
-.plan figure img.r{width:100%;height:300px;object-fit:contain;display:block;border:1px solid var(--line);background:#F7F6F2}
+.plan figure img.r{width:100%;height:300px;object-fit:cover;display:block;border:1px solid var(--line);background:#F7F6F2}
+.plan figure:not(:first-child) img.r{object-fit:contain;background:#fff}
 .plan figure img.p{position:absolute;left:10px;top:10px;width:78px;background:#fff;border:1px solid var(--line);padding:3px}
 .plan figcaption{font-size:13px;color:#5B616B;margin-top:8px}
 .plan .cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;padding:22px 26px;margin-top:32px;font-size:17px}
@@ -382,9 +383,9 @@ footer .disc{border-top:1px solid #24385A;padding-top:18px}
 <div><b>4</b><h3>Deliver and install</h3><p>Our crew delivers, assembles and places everything to the approved plan.</p></div>
 </div>
 <div class="gal">
-<figure><img class="r" src="img/plan/conference.svg" alt="3D layout of a conference room" loading="lazy"><figcaption>Conference room, 3D layout</figcaption></figure>
-<figure><img class="r" src="img/plan/manager-office.svg" alt="3D layout of a manager's office" loading="lazy"><figcaption>Manager's office, 3D layout</figcaption></figure>
-<figure><img class="r" src="img/plan/waiting-room.svg" alt="3D layout of a waiting room" loading="lazy"><figcaption>Waiting room, 3D layout</figcaption></figure>
+<figure><img class="r" src="img/plan/dining-render.jpg" alt="3D rendering of a dining facility interior" loading="lazy"><figcaption>Dining facility, 3D rendering</figcaption></figure>
+<figure><img class="r" src="img/plan/partition-plan.jpg" alt="3D plan of a glass-partition dining area with dimensions" loading="lazy"><figcaption>Glass-partition dining area, 3D plan with dimensions</figcaption></figure>
+<figure><img class="r" src="img/plan/container-plan.jpg" alt="3D drawing of a container office with dimensions" loading="lazy"><figcaption>Container office, 3D drawing with dimensions</figcaption></figure>
 </div>
 <div class="cta"><span>Planning an office move, a new unit space or a full fit-out?</span><a href="#quote" id="survey-cta">Request a free site survey</a></div>
 </div>
