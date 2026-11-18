@@ -219,7 +219,7 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 
 <script>
 const CATS=[["office","Office Supplies"],["toner","Ink & Toner"],["furniture","GSA Furniture"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["medical","Medical & Water Testing"],["printing","Custom Signs & Printing"],["events","Events, Fitness & Rentals"]];
-const PAGE=60, cache={}, DATA_V='20261118f';
+const PAGE=60, cache={}, DATA_V='20261118d';
 const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
 const QS=new URLSearchParams(location.search);
@@ -237,6 +237,7 @@ async function data(slug){
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function words(){return $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean)}
 function specHTML(s){if(!s)return'';let a=s.split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean);if(a.length<2){const b=s.split(/;\s+/).map(x=>x.trim()).filter(Boolean);if(b.length>=3)a=b}return a.length<2?`<p class="sp1">${esc(s)}</p>`:`<ul class="specs">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}
+function score(i,w){const n=(i.c+' '+i.n).toLowerCase(),b=(i.b||'').toLowerCase(),k=(i.k||'').toLowerCase();let s=0;for(const x of w){const re=new RegExp('(^|[^a-z0-9])'+x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z0-9]|$)');if(re.test(n))s+=100;else if(n.includes(x))s+=60;else if(b.includes(x))s+=40;else if(k.includes(x))s+=15;else s+=5}return s}
 function match(all,w){return w.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return w.every(x=>h.includes(x))}):all}
 function tabs(){
   const searching=words().length, cur=searching?scope:cat;
@@ -248,6 +249,7 @@ async function render(){
   if(w.length){
     const sets=await Promise.all(CATS.map(([s])=>data(s)));hits={};const seen=new Set();list=[];
     sets.forEach((arr,k)=>{const s=CATS[k][0],m=match(arr,w);hits[s]=m.length;if(scope==='all'||scope===s)m.forEach(i=>{if(!seen.has(i.c)){seen.add(i.c);list.push({...i,_cat:s})}})});
+    list.forEach((i,n)=>{i._s=score(i,w);i._o=n});list.sort((a,b)=>b._s-a._s||a._o-b._o);
   }else{list=await data(cat);hits={}}
   if(tk!==render.n)return;
   tabs();
