@@ -197,7 +197,7 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 <tbody id="rows"></tbody>
 </table>
 <button class="more" id="more" type="button" hidden>Show more</button>
-<p class="note">Not in the list? Add a note in the quote form with a part number, model or link and we will source it.</p>
+<p class="note">Not in the list? Paste a product link and quantity in the “Items not in our catalog” section of the quote form and we will source it.</p>
 </div>
 </main>
 
@@ -254,7 +254,7 @@ async function render(){
   if(tk!==render.n)return;
   tabs();
   const inQ=new Set(quote.map(x=>x.c));
-  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}?v=${DATA_V}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}${i._cat&&scope==='all'?`<span class="brand">${esc(CNAME[i._cat])}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||(w.length&&Object.values(hits).some(Boolean)?'<tr><td colspan="5">No match in this category. Pick another category above to see the results.</td></tr>':w.length?'<tr><td colspan="5">No match in any category. Send us the part number, model or a link in the quote form and we will source it.</td></tr>':'<tr><td colspan="5">No items in this category yet.</td></tr>');
+  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}?v=${DATA_V}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}${i._cat&&scope==='all'?`<span class="brand">${esc(CNAME[i._cat])}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||(w.length&&Object.values(hits).some(Boolean)?'<tr><td colspan="5">No match in this category. Pick another category above to see the results.</td></tr>':w.length?'<tr><td colspan="5">No match in any category. Paste a product link and quantity in the quote form under “Items not in our catalog” and we will source it.</td></tr>':'<tr><td colspan="5">No items in this category yet.</td></tr>');
   $('count').textContent=list.length.toLocaleString()+' items';
   $('more').hidden=list.length<=shown;
 }

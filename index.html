@@ -213,6 +213,16 @@ button:hover{background:#1B3358}
 .qnote[hidden]{display:none}
 .qnote{display:flex;gap:10px;align-items:center;border:1px solid #2F6B3A;background:#EEF5EF;color:#1F4A27;padding:12px 14px;font-size:14px}
 .hint{font-size:13px;font-weight:400;color:var(--body);background:#FFF6E3;border-left:3px solid var(--accent);padding:8px 10px}
+.other{border:1px solid var(--line);background:#FBFAF7;padding:16px 18px;margin:0;display:flex;flex-direction:column;gap:12px;min-width:0}
+.other legend{font-size:14px;font-weight:700;padding:0 6px}
+.other .hint{margin:0}
+.orow{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:12px}
+.orow label{min-width:0}
+.addrow{background:none;color:var(--navy);border:1px dashed var(--navy);padding:10px 16px;font-size:14px}
+.addrow:hover{background:#EEF1F6}
+.err[hidden]{display:none}
+.err{margin:0;color:#A3261B;font-size:14px;font-weight:600}
+@media (max-width:600px){.orow{grid-template-columns:minmax(0,1fr) 80px}}
 .after{margin:0;font-size:13px;color:#5B616B}
 
 
@@ -503,7 +513,7 @@ footer .disc{border-top:1px solid #24385A;padding-top:18px}
 <div class="howto">
 <h3>How to get a GPC quote</h3>
 <ol>
-<li><i>1</i><div><b>Pick your items</b><span>Add items from the <a href="products.html">catalog</a> with “Add to quote”, or type part numbers, models or links in the form.</span></div></li>
+<li><i>1</i><div><b>Pick your items</b><span>Add items from the <a href="products.html">catalog</a> with “Add to quote”, or or add links and quantities for anything we don't list.</span></div></li>
 <li><i>2</i><div><b>Send the request</b><span>Items in your quote list are filled in for you. Add quantities, delivery area and how you will pay.</span></div></li>
 <li><i>3</i><div><b>Get your quote by email</b><span>A VAT-exempt quote with Form 889 and the purchase certificate, ready for your card holder to sign.</span></div></li>
 </ol>
@@ -541,7 +551,16 @@ footer .disc{border-top:1px solid #24385A;padding-top:18px}
 <option>Not sure yet</option>
 </select></label>
 <label class="full chk"><input type="checkbox" name="site_survey" value="Yes - free site survey / 3D layout requested" id="survey-box"><div>I'd like a free site survey and 3D layout<span>For furniture, office moves and fit-outs. We will contact you to set a date.</span></div></label>
-<label class="full">Items or work needed<span class="hint">Can't find what you need in our catalog? Write the product name and quantity, or paste a product URL. We will source it and quote it with the rest.</span><textarea name="items" rows="6" required placeholder="One item per line, for example:&#10;4 x HP 58A toner (CF258A)&#10;2 x office chair mat, 120x90 cm&#10;or paste a product link"></textarea></label>
+<label class="full">Items from our catalog or work needed<span class="hint">Items you add with “Add to quote” appear here. You can also describe work, for example furniture assembly or a site survey.</span><textarea name="items" rows="5" placeholder="One item per line, for example:&#10;4 x SF-0510 - PIG Oil-Only Absorbent Mat&#10;2 x office chair mat, 120x90 cm"></textarea></label>
+<fieldset class="full other" id="other">
+<legend>Items not in our catalog</legend>
+<p class="hint">Paste a link to the product (Amazon, Coupang, a maker's site, etc.) or type the name or part number, then the quantity. We will source it and quote it with the rest.</p>
+<div class="orow"><label>Product link or name<input type="text" name="other_1_link" placeholder="https://... or brand, model, part number"></label><label class="q">Qty<input type="number" name="other_1_qty" min="1" inputmode="numeric"></label></div>
+<div class="orow"><label>Product link or name<input type="text" name="other_2_link" placeholder="https://... or brand, model, part number"></label><label class="q">Qty<input type="number" name="other_2_qty" min="1" inputmode="numeric"></label></div>
+<div class="orow"><label>Product link or name<input type="text" name="other_3_link" placeholder="https://... or brand, model, part number"></label><label class="q">Qty<input type="number" name="other_3_qty" min="1" inputmode="numeric"></label></div>
+<button type="button" class="addrow" id="addrow">+ Add another item</button>
+</fieldset>
+<p class="err full" id="qerr" hidden>Please add at least one item, either above or in “Items not in our catalog”.</p>
 <button type="submit" class="full">Send Request</button>
 <p class="after full">We reply by email with a quote. Nothing is charged until your card holder approves it.</p>
 </form>
@@ -567,5 +586,17 @@ var f=document.querySelector('form[name=quote]');if(f)f.addEventListener('submit
 </script>
 <script>document.getElementById('survey-cta').addEventListener('click',function(){var b=document.getElementById('survey-box');if(b)b.checked=true;});</script>
 
+<script>
+(function(){var box=document.getElementById('other'),btn=document.getElementById('addrow'),n=3;
+if(btn)btn.addEventListener('click',function(){if(n>=15)return;n++;var d=document.createElement('div');d.className='orow';
+d.innerHTML='<label>Product link or name<input type="text" name="other_'+n+'_link" placeholder="https://... or brand, model, part number"></label><label class="q">Qty<input type="number" name="other_'+n+'_qty" min="1" inputmode="numeric"></label>';
+box.insertBefore(d,btn);d.querySelector('input').focus();if(n>=15)btn.hidden=true;});
+var f=document.querySelector('form[name=quote]');if(f)f.addEventListener('submit',function(e){
+var t=f.querySelector('textarea[name=items]').value.trim(),any=false;
+f.querySelectorAll('.orow').forEach(function(r){var l=r.querySelector('input[type=text]'),q=r.querySelector('input[type=number]');
+if(l.value.trim()){any=true;if(!q.value){q.value=1}}else{l.disabled=true;q.disabled=true}});
+if(!t&&!any){e.preventDefault();f.querySelectorAll('.orow input').forEach(function(i){i.disabled=false});var er=document.getElementById('qerr');er.hidden=false;er.scrollIntoView({block:'center'});}
+},true);})();
+</script>
 </body>
 </html>
