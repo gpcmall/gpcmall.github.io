@@ -2,12 +2,12 @@
  {
   "slug": "furniture",
   "title": "GSA Furniture",
-  "count": 1602
+  "count": 1601
  },
  {
   "slug": "office",
   "title": "Office Supplies",
-  "count": 2536
+  "count": 2535
  },
  {
   "slug": "toner",
@@ -22,7 +22,7 @@
  {
   "slug": "it",
   "title": "IT & Electronics",
-  "count": 969
+  "count": 960
  },
  {
   "slug": "industrial",
@@ -42,7 +42,7 @@
  {
   "slug": "medical",
   "title": "Medical & Water Testing",
-  "count": 34
+  "count": 33
  },
  {
   "slug": "printing",
