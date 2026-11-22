@@ -39,6 +39,7 @@ th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vert
 th{font-family:'Archivo',sans-serif;font-size:13px;letter-spacing:.06em;background:var(--sand);color:#4A4F59}
 td.code{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;color:#4A4F59}
 td .spec{display:block;color:var(--body);font-size:13px;margin-top:2px;line-height:1.5}
+.smore{border:0;background:none;padding:0;margin-left:2px;color:var(--navy,#14213d);font:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
 td .brand{display:inline-block;font-size:12px;border:1px solid var(--line);padding:1px 6px;margin-top:4px;color:#4A4F59}
 .add{background:var(--navy);color:var(--paper);border:0;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
 .add.on{background:#2F6B3A}
@@ -235,7 +236,7 @@ async function data(slug){
   if(window.SR_DATA&&SR_DATA[slug])return cache[slug]=vis(SR_DATA[slug]);
   const r=await fetch('data/'+slug+'.json?v='+DATA_V);return cache[slug]=vis(await r.json());
 }
-function specLines(s){return String(s).split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean).map(esc).join('<br>')}
+function specLines(s){const a=String(s).split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean).map(esc);if(a.length<=3)return a.join('<br>');return a.slice(0,3).join('<br>')+`<span class="xs" hidden><br>${a.slice(3).join('<br>')}</span> <button type="button" class="smore" aria-expanded="false">More ▾</button>`}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function words(){return $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean)}
 function specHTML(s){if(!s)return'';let a=s.split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean);if(a.length<2){const b=s.split(/;\s+/).map(x=>x.trim()).filter(Boolean);if(b.length>=3)a=b}return a.length<2?`<p class="sp1">${esc(s)}</p>`:`<ul class="specs">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}
@@ -278,7 +279,7 @@ $('dbody').onclick=e=>{const g=e.target.closest('[data-g]');if(g){$('big').inner
 $('dclose').onclick=()=>$('dlg').close();
 $('dlg').onclick=e=>{if(e.target===$('dlg'))$('dlg').close()};
 function toggle(c){if(quote.some(x=>x.c===c))quote=quote.filter(x=>x.c!==c);else{const i=list.find(x=>x.c===c);quote.push({c,n:i.n,q:1})}save(quote);drawQ();render()}
-$('rows').onclick=e=>{const d=e.target.closest('[data-d]');if(d){detail(d.dataset.d);return}
+$('rows').onclick=e=>{const sm=e.target.closest('.smore');if(sm){const x=sm.previousElementSibling,open=x.hidden;x.hidden=!open;sm.textContent=open?'Less ▴':'More ▾';sm.setAttribute('aria-expanded',open);return}const d=e.target.closest('[data-d]');if(d){detail(d.dataset.d);return}
   const b=e.target.closest('.add');if(!b)return;const c=b.dataset.c;
   if(quote.some(x=>x.c===c))quote=quote.filter(x=>x.c!==c);else{const i=list.find(x=>x.c===c);quote.push({c,n:i.n,q:1})}
   save(quote);drawQ();render()};
