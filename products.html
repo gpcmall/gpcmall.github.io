@@ -219,7 +219,7 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 
 <script>
 const CATS=[["office","Office Supplies"],["toner","Ink & Toner"],["furniture","GSA Furniture"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["indfurn","Industrial Furniture"],["container","Container"],["medical","Medical & Water Testing"],["printing","Custom Signs & Printing"],["events","Events, Fitness & Rentals"]];
-const PAGE=60, cache={}, DATA_V='20261118gxicsgbhrwkmdfLxygpdzqrtuvwxyzabcdefghijklmno';
+const PAGE=60, cache={}, DATA_V='20261118gxicsgbhrwkmdfLxygpdzqrtuvwxyzabcdefghijklmnop';
 const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
 const QS=new URLSearchParams(location.search);
@@ -231,8 +231,9 @@ function save(q){try{localStorage.setItem('sr_quote',JSON.stringify(q))}catch(e)
 let quote=load();
 async function data(slug){
   if(cache[slug])return cache[slug];
-  if(window.SR_DATA&&SR_DATA[slug])return cache[slug]=SR_DATA[slug];
-  const r=await fetch('data/'+slug+'.json?v='+DATA_V);return cache[slug]=await r.json();
+  const vis=a=>a.filter(i=>i.i&&!/nophoto/.test(i.i));
+  if(window.SR_DATA&&SR_DATA[slug])return cache[slug]=vis(SR_DATA[slug]);
+  const r=await fetch('data/'+slug+'.json?v='+DATA_V);return cache[slug]=vis(await r.json());
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function words(){return $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean)}
