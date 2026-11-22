@@ -7,7 +7,7 @@
  {
   "slug": "office",
   "title": "Office Supplies",
-  "count": 2536
+  "count": 2474
  },
  {
   "slug": "toner",
@@ -17,12 +17,12 @@
  {
   "slug": "safety",
   "title": "Safety & PPE",
-  "count": 722
+  "count": 719
  },
  {
   "slug": "it",
   "title": "IT & Electronics",
-  "count": 961
+  "count": 951
  },
  {
   "slug": "industrial",
@@ -47,11 +47,11 @@
  {
   "slug": "printing",
   "title": "Custom Signs & Printing",
-  "count": 89
+  "count": 50
  },
  {
   "slug": "events",
   "title": "Events, Fitness & Rentals",
-  "count": 23
+  "count": 12
  }
 ]
