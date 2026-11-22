@@ -38,7 +38,7 @@ table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(-
 th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
 th{font-family:'Archivo',sans-serif;font-size:13px;letter-spacing:.06em;background:var(--sand);color:#4A4F59}
 td.code{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;color:#4A4F59}
-td .spec{display:block;color:var(--body);font-size:13px;margin-top:2px}
+td .spec{display:block;color:var(--body);font-size:13px;margin-top:2px;line-height:1.5}
 td .brand{display:inline-block;font-size:12px;border:1px solid var(--line);padding:1px 6px;margin-top:4px;color:#4A4F59}
 .add{background:var(--navy);color:var(--paper);border:0;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
 .add.on{background:#2F6B3A}
@@ -235,6 +235,7 @@ async function data(slug){
   if(window.SR_DATA&&SR_DATA[slug])return cache[slug]=vis(SR_DATA[slug]);
   const r=await fetch('data/'+slug+'.json?v='+DATA_V);return cache[slug]=vis(await r.json());
 }
+function specLines(s){return String(s).split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean).map(esc).join('<br>')}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function words(){return $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean)}
 function specHTML(s){if(!s)return'';let a=s.split(/\s+·\s+|\n+/).map(x=>x.trim()).filter(Boolean);if(a.length<2){const b=s.split(/;\s+/).map(x=>x.trim()).filter(Boolean);if(b.length>=3)a=b}return a.length<2?`<p class="sp1">${esc(s)}</p>`:`<ul class="specs">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}
@@ -255,7 +256,7 @@ async function render(){
   if(tk!==render.n)return;
   tabs();
   const inQ=new Set(quote.map(x=>x.c));
-  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}?v=${DATA_V}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${esc(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}${i._cat&&scope==='all'?`<span class="brand">${esc(CNAME[i._cat])}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||(w.length&&Object.values(hits).some(Boolean)?'<tr><td colspan="5">No match in this category. Pick another category above to see the results.</td></tr>':w.length?'<tr><td colspan="5">No match in any category. Paste a product link and quantity in the quote form under “Items not in our catalog” and we will source it.</td></tr>':'<tr><td colspan="5">No items in this category yet.</td></tr>');
+  $('rows').innerHTML=list.slice(0,shown).map(i=>`<tr><td class="th"><button type="button" class="thumb" data-d="${esc(i.c)}" aria-label="View ${esc(i.n)}">${i.i?`<img src="${esc(TH(i.i))}?v=${DATA_V}" alt="" loading="lazy">`:BOX}</button></td><td class="code">${esc(i.c)}</td><td><button type="button" class="name" data-d="${esc(i.c)}">${esc(i.n)}</button>${i.s?`<span class="spec">${specLines(i.s)}</span>`:''}${i.b?`<span class="brand">${esc(i.b)}</span>`:''}${i._cat&&scope==='all'?`<span class="brand">${esc(CNAME[i._cat])}</span>`:''}</td><td class="u">${esc(i.u||'')}</td><td><button type="button" class="add${inQ.has(i.c)?' on':''}" data-c="${esc(i.c)}">${inQ.has(i.c)?'Added ✓':'Add to quote'}</button></td></tr>`).join('')||(w.length&&Object.values(hits).some(Boolean)?'<tr><td colspan="5">No match in this category. Pick another category above to see the results.</td></tr>':w.length?'<tr><td colspan="5">No match in any category. Paste a product link and quantity in the quote form under “Items not in our catalog” and we will source it.</td></tr>':'<tr><td colspan="5">No items in this category yet.</td></tr>');
   $('count').textContent=list.length.toLocaleString()+' items';
   $('more').hidden=list.length<=shown;
 }
