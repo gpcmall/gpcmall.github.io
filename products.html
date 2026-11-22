@@ -218,12 +218,12 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 <dialog id="dlg" aria-label="Item details"><div style="position:relative"><button class="close" id="dclose" type="button" aria-label="Close">×</button><div class="dlg" id="dbody"></div></div></dialog>
 
 <script>
-const CATS=[["container","Container"],["printing","Custom Signs & Printing"],["furniture","GSA Furniture"],["office","Office Supplies"],["toner","Ink & Toner"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["indfurn","Industrial Furniture"],["medical","Medical & Water Testing"],["events","Events, Fitness & Rentals"]];
+const CATS=[["printing","Custom Signs & Printing"],["container","Container"],["furniture","GSA Furniture"],["office","Office Supplies"],["toner","Ink & Toner"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["indfurn","Industrial Furniture"],["medical","Medical & Water Testing"],["events","Events, Fitness & Rentals"]];
 const PAGE=60, cache={}, DATA_V='20261118gxicsgbhrwkmdfLxygpdzqrtuvwxyzabcdefghijklmnopqrstu';
 const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
 const QS=new URLSearchParams(location.search);
-let cat=QS.get('cat')||'container', shown=PAGE, list=[], scope=null, hits={};
+let cat=QS.get('cat')||'printing', shown=PAGE, list=[], scope=null, hits={};
 const CNAME=Object.fromEntries(CATS);
 const $=id=>document.getElementById(id);
 function load(){try{return JSON.parse(localStorage.getItem('sr_quote')||'[]')}catch(e){return []}}
