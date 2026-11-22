@@ -7,7 +7,7 @@
  {
   "slug": "office",
   "title": "Office Supplies",
-  "count": 2145
+  "count": 2159
  },
  {
   "slug": "toner",
@@ -22,12 +22,12 @@
  {
   "slug": "it",
   "title": "IT & Electronics",
-  "count": 747
+  "count": 749
  },
  {
   "slug": "industrial",
   "title": "Industrial & Tools",
-  "count": 369
+  "count": 375
  },
  {
   "slug": "indfurn",
@@ -42,7 +42,7 @@
  {
   "slug": "medical",
   "title": "Medical & Water Testing",
-  "count": 20
+  "count": 27
  },
  {
   "slug": "printing",
@@ -52,6 +52,6 @@
  {
   "slug": "events",
   "title": "Events, Fitness & Rentals",
-  "count": 12
+  "count": 19
  }
 ]
