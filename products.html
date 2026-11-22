@@ -84,6 +84,23 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 .dlg dl{margin:16px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
 .dlg dt{color:#4A4F59}.dlg dd{margin:0}
 .dlg .close{position:absolute;right:12px;top:8px;background:none;border:0;font-size:26px;cursor:pointer}
+.grn{background:#fff;border-bottom:1px solid var(--line);padding:40px 0}
+.grn h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:34px;line-height:1.1;color:var(--navy);margin:0 0 12px}
+.grn .intro{margin:0;font-size:17px;color:var(--body);max-width:760px}
+.grn .pts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+.grn .pts div{border-top:2px solid var(--accent);padding-top:12px}
+.grn .pts h3{font-size:18px;margin:0 0 6px}
+.grn .pts p{margin:0;font-size:15px;line-height:1.55;color:var(--body)}
+.grn .gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.grn figure{margin:0}
+.grn figure img{width:100%;height:240px;object-fit:cover;display:block;border:1px solid var(--line);background:#F7F6F2}
+.grn figure.w{grid-column:span 2}
+.grn .gal2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px}
+.grn .gal2 img{width:100%;height:auto;aspect-ratio:2.16/1;object-fit:cover;display:block;border:1px solid var(--line)}
+.grn .case{margin-top:12px;font-size:14px;color:#5B616B}
+.grn .cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;padding:20px 24px;margin-top:28px;font-size:17px}
+.grn .cta a{background:var(--accent);color:var(--navy);font-weight:700;text-decoration:none;padding:12px 20px}
+@media (max-width:900px){.grn .gal{grid-template-columns:repeat(2,minmax(0,1fr))}.grn .pts,.grn .gal2{grid-template-columns:minmax(0,1fr)}.grn figure img{height:190px}.grn h2{font-size:26px}}
 .gsa{background:#fff;border-bottom:1px solid var(--line)}
 .gsa .in{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding:44px 0}
 .gsa .txt{flex:999 1 520px;min-width:0}
@@ -146,6 +163,37 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 </div>
 </section>
 
+<section class="grn" id="grn" hidden aria-labelledby="grn-h">
+<div class="wrap">
+<h2 id="grn-h">Artificial plants and trees, delivered and placed</h2>
+<p class="intro">Lifelike artificial trees and plants for lobbies, conference rooms, waiting areas, offices and break rooms. We pick sizes and planters to fit each room, deliver and place every piece with your POC.</p>
+<div class="pts">
+<div><h3>No upkeep</h3><p>No watering, no soil, no bugs. Nothing dies when the person who watered it PCSes.</p></div>
+<div><h3>Sized to the room</h3><p>Floor trees, desk and counter plants, wall greenery and matching planters.</p></div>
+<div><h3>One quote, installed</h3><p>Plants, planters, delivery and placement on one VAT-exempt quote, payable by GPC.</p></div>
+</div>
+<div class="gal">
+<figure class="w"><img src="img/work/greenery/access-01.jpg" alt="Conference room with two artificial floor plants beside the wall displays" loading="lazy"></figure>
+<figure><img src="img/work/greenery/access-03.jpg" alt="Tall artificial dracaena in a white planter between two windows in a waiting area" loading="lazy"></figure>
+<figure><img src="img/work/greenery/access-04.jpg" alt="Artificial monstera in a stone planter in an office corner" loading="lazy"></figure>
+<figure><img src="img/work/greenery/access-05.jpg" alt="Artificial schefflera tree in a beige planter beside a doorway" loading="lazy"></figure>
+<figure><img src="img/work/greenery/access-06.jpg" alt="Artificial fiddle-leaf fig in a black planter next to an elevator" loading="lazy"></figure>
+<figure class="w"><img src="img/work/greenery/access-02.jpg" alt="Large artificial bird of paradise plants flanking a wall display and credenza" loading="lazy"></figure>
+<figure class="w"><img src="img/work/greenery/access-08.jpg" alt="Two small potted artificial plants on a break room cabinet" loading="lazy"></figure>
+<figure><img src="img/work/greenery/access-07.jpg" alt="Artificial ficus tree in a hallway corner" loading="lazy"></figure>
+<figure><img src="img/work/greenery/access-09.jpg" alt="Artificial bird of paradise with trailing ivy in a room corner" loading="lazy"></figure>
+</div>
+<p class="case">Recent install, November 2026: Camp Humphreys – conference room, waiting area, hallways and break room.</p>
+<div class="gal2">
+<img src="img/work/greenery/pool-01.jpg" alt="Artificial palm trees beside an outdoor walkway at Camp Humphreys" loading="lazy">
+<img src="img/work/greenery/pool-02.jpg" alt="Two artificial palm trees beside patio seating at Camp Humphreys" loading="lazy">
+<img src="img/work/greenery/pool-03.jpg" alt="Row of artificial palm trees at an outdoor site at Camp Humphreys" loading="lazy">
+<img src="img/work/greenery/pool-04.jpg" alt="Pairs of artificial palm trees along a fence at Camp Humphreys" loading="lazy">
+</div>
+<p class="case">Recent install, May 2026: Camp Humphreys – 3 m and 4 m artificial palm trees, outdoor installation.</p>
+<div class="cta"><span>Want greenery for your building? We visit, suggest a layout and quote it.</span><a href="index.html#quote">Request a quote</a></div>
+</div>
+</section>
 <section class="gsa" id="gsa" hidden aria-labelledby="gsa-h">
 <div class="wrap">
 <div class="in">
@@ -219,8 +267,8 @@ dialog::backdrop{background:rgba(12,24,41,.6)}
 <dialog id="dlg" aria-label="Item details"><div style="position:relative"><button class="close" id="dclose" type="button" aria-label="Close">×</button><div class="dlg" id="dbody"></div></div></dialog>
 
 <script>
-const CATS=[["printing","Custom Signs & Printing"],["container","Container"],["furniture","GSA Furniture"],["office","Office Supplies"],["toner","Ink & Toner"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["indfurn","Industrial Furniture"],["medical","Medical & Water Testing"],["events","Events, Fitness & Rentals"]];
-const PAGE=60, cache={}, DATA_V='20261118gxicsgbhrwkmdfLxygpdzqrtuvwxyzabcdefghijklmnopqrstuvwxyzABCDEFG';
+const CATS=[["printing","Custom Signs & Printing"],["container","Container"],["greenery","Interior Greenery"],["furniture","GSA Furniture"],["office","Office Supplies"],["toner","Ink & Toner"],["safety","Safety & PPE"],["it","IT & Electronics"],["industrial","Industrial & Tools"],["indfurn","Industrial Furniture"],["medical","Medical & Water Testing"],["events","Events, Fitness & Rentals"]];
+const PAGE=60, cache={}, DATA_V='20261118gxicsgbhrwkmdfLxygpdzqrtuvwxyzabcdefghijklmnopqrstuvwxyzABCDEFGH';
 const TH=u=>u.startsWith('img/products/')?u.replace('img/products/','img/products/t/'):u;
 const BOX='<svg viewBox="0 0 24 24" fill="none" stroke="#12233D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
 const QS=new URLSearchParams(location.search);
@@ -244,7 +292,7 @@ function score(i,w){const n=(i.c+' '+i.n).toLowerCase(),b=(i.b||'').toLowerCase(
 function match(all,w){return w.length?all.filter(i=>{const h=(i.c+' '+i.n+' '+(i.s||'')+' '+(i.b||'')+' '+(i.k||'')).toLowerCase();return w.every(x=>h.includes(x))}):all}
 function tabs(){
   const searching=words().length, cur=searching?scope:cat;
-  $('gsa').hidden=cur!=='furniture';
+  $('gsa').hidden=cur!=='furniture';$('grn').hidden=cur!=='greenery';
   $('tabs').innerHTML=(searching?`<button type="button" data-s="all" aria-pressed="${cur==='all'}">All categories<span>${Object.values(hits).reduce((a,b)=>a+b,0)}</span></button>`:'')+CATS.map(([s,t])=>`<button type="button" data-s="${s}" aria-pressed="${s===cur}">${esc(t)}${searching?`<span>${hits[s]||0}</span>`:''}</button>`).join('');
 }
 async function render(){

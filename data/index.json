@@ -7,7 +7,7 @@
  {
   "slug": "office",
   "title": "Office Supplies",
-  "count": 2171
+  "count": 2169
  },
  {
   "slug": "toner",
@@ -38,6 +38,11 @@
   "slug": "container",
   "title": "Container",
   "count": 3
+ },
+ {
+  "slug": "greenery",
+  "title": "Interior Greenery",
+  "count": 2
  },
  {
   "slug": "medical",
