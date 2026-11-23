@@ -261,6 +261,14 @@ footer .disc{border-top:1px solid #24385A;padding-top:18px}
   nav a.btn-accent{margin-left:0}
 }
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8TGGX5R5E"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-L8TGGX5R5E');
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button.add');if(b&&!b.classList.contains('on'))gtag('event','add_to_quote',{item_id:b.getAttribute('data-c')});},true);
+document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_name:f.getAttribute('name')||f.className||'form'});},true);
+</script>
 </head>
 <body>
 
